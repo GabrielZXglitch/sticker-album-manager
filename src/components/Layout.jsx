@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import StickerForm from './StickerForm';
@@ -7,7 +7,6 @@ import StickerForm from './StickerForm';
 const Layout = ({ user }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingSticker, setEditingSticker] = useState(null);
-  const navigate = useNavigate();
 
   const handleLogout = () => signOut(auth);
 
@@ -24,7 +23,8 @@ const Layout = ({ user }) => {
           <div className="font-display text-headline-md text-primary tracking-tight">StickerAlbum</div>
           <div className="flex items-center gap-base">
             <span className="hidden sm:block text-label-sm text-on-surface-variant">{user.email}</span>
-            <button onClick={handleLogout} className="text-on-surface-variant hover:text-primary transition-colors p-2">
+            <button onClick={handleLogout} className="text-on-surface-variant hover:text-primary transition-colors p-2 flex items-center gap-1">
+              <span className="hidden sm:inline text-label-sm uppercase">Sair</span>
               <span className="material-symbols-outlined">logout</span>
             </button>
           </div>
@@ -35,17 +35,17 @@ const Layout = ({ user }) => {
         {/* Desktop Sidebar */}
         <aside className="h-full w-64 fixed left-0 top-16 hidden lg:flex flex-col bg-surface-container-low border-r border-outline-variant p-container-padding gap-base z-40">
           <nav className="flex flex-col gap-2">
-            <NavButton to="/" icon="dashboard" label="Dashboard" />
-            <NavButton to="/collection" icon="auto_stories" label="Collection" />
+            <NavButton to="/" icon="dashboard" label="Início" />
+            <NavButton to="/colecao" icon="auto_stories" label="Coleção" />
             <NavButton to="/legends" icon="stars" label="Legends" />
-            <NavButton to="/trade" icon="swap_horiz" label="Trade" />
+            <NavButton to="/troca" icon="swap_horiz" label="Troca" />
           </nav>
           <div className="mt-auto pt-8">
             <button 
               onClick={() => openForm()}
               className="w-full flex items-center justify-center bg-primary text-on-primary font-label-lg px-4 py-3 rounded-lg hover:bg-primary-container transition-colors shadow-sm"
             >
-              Add New Sticker
+              Adicionar Figurinha
             </button>
           </div>
         </aside>
@@ -66,10 +66,10 @@ const Layout = ({ user }) => {
 
       {/* Bottom Nav - Mobile Only */}
       <nav className="lg:hidden fixed bottom-0 w-full bg-surface border-t border-outline-variant flex justify-around items-center h-20 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] pb-4 pt-2">
-        <MobileNavLink to="/" icon="dashboard" label="Dashboard" />
-        <MobileNavLink to="/collection" icon="auto_stories" label="Collection" />
+        <MobileNavLink to="/" icon="dashboard" label="Início" />
+        <MobileNavLink to="/colecao" icon="auto_stories" label="Coleção" />
         <MobileNavLink to="/legends" icon="stars" label="Legends" />
-        <MobileNavLink to="/trade" icon="swap_horiz" label="Trade" />
+        <MobileNavLink to="/troca" icon="swap_horiz" label="Troca" />
       </nav>
 
       {/* Sticker Form Modal */}

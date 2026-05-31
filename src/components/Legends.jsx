@@ -29,9 +29,9 @@ const Legends = ({ user }) => {
       <div>
         <h1 className="text-headline-md text-on-surface font-bold flex items-center gap-2">
           <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
-          Legends Hall
+          Galeria de Legends
         </h1>
-        <p className="text-body-md text-on-surface-variant">Your most prestigious stickers in one place.</p>
+        <p className="text-body-md text-on-surface-variant">Suas figurinhas mais prestigiadas em um só lugar.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -47,7 +47,7 @@ const Legends = ({ user }) => {
       {stickers.length === 0 && (
         <div className="text-center py-20 bg-surface-container rounded-2xl border-2 border-dashed border-outline-variant">
           <span className="material-symbols-outlined text-6xl text-outline-variant mb-4">stars</span>
-          <p className="text-body-lg text-on-surface-variant italic">No Legends yet. Keep collecting!</p>
+          <p className="text-body-lg text-on-surface-variant italic">Nenhuma Legend ainda. Continue colecionando!</p>
         </div>
       )}
     </div>

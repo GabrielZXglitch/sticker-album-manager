@@ -27,9 +27,9 @@ const Trade = ({ user }) => {
       <div>
         <h1 className="text-headline-md text-on-surface font-bold flex items-center gap-2">
           <span className="material-symbols-outlined text-primary">swap_horiz</span>
-          Trading Hub
+          Central de Trocas
         </h1>
-        <p className="text-body-md text-on-surface-variant">Show these to your friends at swapping events!</p>
+        <p className="text-body-md text-on-surface-variant">Mostre estas figurinhas para seus amigos nos eventos de troca!</p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -45,7 +45,7 @@ const Trade = ({ user }) => {
       {stickers.length === 0 && (
         <div className="text-center py-20 bg-surface-container rounded-2xl border-2 border-dashed border-outline-variant">
           <span className="material-symbols-outlined text-6xl text-outline-variant mb-4">content_copy</span>
-          <p className="text-body-lg text-on-surface-variant italic">No duplicates to trade right now.</p>
+          <p className="text-body-lg text-on-surface-variant italic">Sem figurinhas repetidas para trocar no momento.</p>
         </div>
       )}
     </div>

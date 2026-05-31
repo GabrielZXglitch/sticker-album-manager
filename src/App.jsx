@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { onAuthStateChanged, getRedirectResult } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
@@ -14,11 +14,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for redirect result
-    getRedirectResult(auth).catch(error => {
-      console.error("Redirect error", error);
-    });
-
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
@@ -38,9 +33,10 @@ function App() {
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="/" element={user ? <Layout user={user} /> : <Navigate to="/login" />}>
           <Route index element={<Dashboard user={user} />} />
-          <Route path="collection" element={<Collection user={user} />} />
+          <Route path="colecao" element={<Collection user={user} />} />
           <Route path="legends" element={<Legends user={user} />} />
-          <Route path="trade" element={<Trade user={user} />} />
+          <Route path="troca" element={<Trade user={user} />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </Router>

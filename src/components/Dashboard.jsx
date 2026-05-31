@@ -24,19 +24,28 @@ const Dashboard = ({ user }) => {
     shiny: stickers.filter(s => s.tipo === 'brilhante').length,
   };
 
-  if (loading) return null;
+  if (loading) return (
+    <div className="flex flex-col gap-8 mt-4 animate-pulse">
+      <div className="h-20 bg-surface-container rounded-xl w-3/4"></div>
+      <div className="h-12 bg-surface-container rounded-full"></div>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="h-32 bg-surface-container rounded-xl"></div>
+        <div className="h-32 bg-surface-container rounded-xl"></div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-col gap-8 mt-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2 font-bold">Album Overview</h1>
-        <p className="text-body-md text-on-surface-variant">Welcome back! Here's your current progress.</p>
+        <h1 className="text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2 font-bold">Visão Geral</h1>
+        <p className="text-body-md text-on-surface-variant">Bem-vindo de volta! Veja seu progresso atual.</p>
       </div>
 
       <div className="flex items-center gap-3 bg-surface-container px-4 py-3 rounded-full border border-outline-variant w-full justify-between">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-primary">trending_up</span>
-          <span className="text-label-lg text-on-surface">Overall Completion</span>
+          <span className="text-label-lg text-on-surface">Progresso Total</span>
         </div>
         <div className="flex-1 max-w-[200px] h-2 bg-surface-variant rounded-full ml-4 overflow-hidden">
           <div 
@@ -44,16 +53,16 @@ const Dashboard = ({ user }) => {
             style={{ width: `${Math.min(100, (stats.stuck / 600) * 100)}%` }}
           ></div>
         </div>
-        <span className="text-label-sm ml-2">{Math.round((stats.stuck / 600) * 100)}%</span>
+        <span className="text-label-sm ml-2 font-bold">{Math.round((stats.stuck / 600) * 100)}%</span>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <StatCard icon="collections" value={stats.total} label="Total Stickers" color="text-primary" />
-        <StatCard icon="content_copy" value={stats.duplicates} label="Duplicates" color="text-tertiary" />
+        <StatCard icon="collections" value={stats.total} label="Total de Figurinhas" color="text-primary" />
+        <StatCard icon="content_copy" value={stats.duplicates} label="Repetidas" color="text-tertiary" />
         <StatCard 
           icon="book" 
           value={stats.stuck} 
-          label="Stuck in Album" 
+          label="Coladas no Álbum" 
           full 
           className="bg-primary-container border-outline-variant text-on-primary-container" 
         />
@@ -66,7 +75,7 @@ const Dashboard = ({ user }) => {
           <div className="absolute inset-0 shiny-overlay"></div>
           <span className="material-symbols-outlined text-primary mb-2 text-3xl">flare</span>
           <span className="text-display text-on-surface">{stats.shiny}</span>
-          <span className="text-label-lg text-on-surface-variant mt-1">Shiny Stickers</span>
+          <span className="text-label-lg text-on-surface-variant mt-1">Brilhantes</span>
         </div>
       </div>
     </div>
@@ -76,7 +85,7 @@ const Dashboard = ({ user }) => {
 const StatCard = ({ icon, value, label, color, full, className = "" }) => (
   <div className={`bg-surface border border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm ${full ? 'col-span-2' : ''} ${className}`}>
     <span className={`material-symbols-outlined mb-2 text-3xl ${color}`}>{icon}</span>
-    <span className="text-display text-on-surface">{value}</span>
+    <span className="text-display text-on-surface font-bold">{value}</span>
     <span className="text-label-lg text-on-surface-variant mt-1">{label}</span>
   </div>
 );

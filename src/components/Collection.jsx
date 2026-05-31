@@ -7,7 +7,7 @@ const Collection = ({ user }) => {
   const [stickers, setStickers] = useState([]);
   const [selecoes, setSelecoes] = useState([]);
   const [search, setSearch] = useState('');
-  const [filterSelecao, setFilterSelecao] = useState('All');
+  const [filterSelecao, setFilterSelecao] = useState('Todas');
   const [loading, setLoading] = useState(true);
   const { openForm } = useOutletContext();
 
@@ -28,13 +28,13 @@ const Collection = ({ user }) => {
 
   const filteredStickers = stickers.filter(s => {
     const matchSearch = s.jogador.toLowerCase().includes(search.toLowerCase());
-    const matchFilter = filterSelecao === 'All' || s.selecao === filterSelecao;
+    const matchFilter = filterSelecao === 'Todas' || s.selecao === filterSelecao;
     return matchSearch && matchFilter;
   });
 
   const handleDelete = async (e, id) => {
     e.stopPropagation();
-    if (confirm('Delete this sticker?')) {
+    if (confirm('Deseja excluir esta figurinha?')) {
       await deleteDoc(doc(db, `users/${user.uid}/figurinhas`, id));
     }
   };
@@ -44,11 +44,11 @@ const Collection = ({ user }) => {
   return (
     <div className="flex flex-col gap-6 animate-in slide-in-from-bottom duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h1 className="text-headline-md text-on-surface font-bold">My Collection</h1>
+        <h1 className="text-headline-md text-on-surface font-bold">Minha Coleção</h1>
         <div className="flex flex-col sm:flex-row gap-3">
           <input 
             type="text" 
-            placeholder="Search player..." 
+            placeholder="Buscar jogador..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="bg-surface border border-outline-variant rounded-lg px-4 py-2 text-body-md focus:ring-2 focus:ring-primary outline-none"
@@ -58,7 +58,7 @@ const Collection = ({ user }) => {
             onChange={(e) => setFilterSelecao(e.target.value)}
             className="bg-surface border border-outline-variant rounded-lg px-4 py-2 text-body-md focus:ring-2 focus:ring-primary outline-none"
           >
-            <option value="All">All Teams</option>
+            <option value="Todas">Todas as Seleções</option>
             {selecoes.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
@@ -77,7 +77,7 @@ const Collection = ({ user }) => {
 
       {filteredStickers.length === 0 && (
         <div className="text-center py-20 text-on-surface-variant italic">
-          No stickers found. Add your first one!
+          Nenhuma figurinha encontrada. Adicione sua primeira!
         </div>
       )}
     </div>
@@ -123,7 +123,7 @@ export const StickerCard = ({ sticker, onClick, onDelete, large }) => {
 
       <div className="flex items-center gap-2 z-10">
         {sticker.repetida && (
-          <div className="bg-primary text-on-primary px-2 py-1 rounded-full font-label-sm text-label-sm shadow-sm">
+          <div className="bg-primary text-on-primary px-2 py-1 rounded-full font-label-sm text-label-sm shadow-sm font-bold">
             +1
           </div>
         )}

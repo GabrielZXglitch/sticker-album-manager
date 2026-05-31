@@ -61,7 +61,7 @@ const StickerForm = ({ user, onClose, editingSticker }) => {
       >
         <div className="flex justify-between items-center">
           <h2 className="text-headline-md text-on-surface font-bold">
-            {editingSticker ? 'Edit Sticker' : 'Add Sticker'}
+            {editingSticker ? 'Editar Figurinha' : 'Adicionar Figurinha'}
           </h2>
           <button type="button" onClick={onClose} className="p-2 hover:bg-surface-container rounded-full">
             <span className="material-symbols-outlined">close</span>
@@ -70,19 +70,19 @@ const StickerForm = ({ user, onClose, editingSticker }) => {
 
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="text-label-lg text-on-surface-variant uppercase">Player Name</label>
+            <label className="text-label-lg text-on-surface-variant uppercase">Nome do Jogador</label>
             <input 
               required
               type="text" 
               value={jogador}
               onChange={(e) => setJogador(e.target.value)}
               className="bg-surface-container px-4 py-3 rounded-lg border border-outline-variant outline-none focus:ring-2 focus:ring-primary text-body-lg"
-              placeholder="e.g. Lionel Messi"
+              placeholder="Ex: Lionel Messi"
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-label-lg text-on-surface-variant uppercase">National Team</label>
+            <label className="text-label-lg text-on-surface-variant uppercase">Seleção</label>
             <select 
               value={selecao}
               onChange={(e) => setSelecao(e.target.value)}
@@ -93,17 +93,17 @@ const StickerForm = ({ user, onClose, editingSticker }) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-label-lg text-on-surface-variant uppercase">Type</label>
+            <label className="text-label-lg text-on-surface-variant uppercase">Tipo</label>
             <div className="flex gap-2">
-              <TypeButton label="Common" active={tipo === 'comum'} onClick={() => setTipo('comum')} />
+              <TypeButton label="Comum" active={tipo === 'comum'} onClick={() => setTipo('comum')} />
               <TypeButton label="Legend" active={tipo === 'legend'} onClick={() => setTipo('legend')} />
-              <TypeButton label="Shiny" active={tipo === 'brilhante'} onClick={() => setTipo('brilhante')} />
+              <TypeButton label="Brilhante" active={tipo === 'brilhante'} onClick={() => setTipo('brilhante')} />
             </div>
           </div>
 
           <div className="flex flex-col gap-3 pt-2">
-            <Toggle label="Duplicate sticker" checked={repetida} onChange={setRepetida} icon="content_copy" />
-            <Toggle label="Stuck in album" checked={colada} onChange={setColada} icon="book" />
+            <Toggle label="Figurinha repetida" checked={repetida} onChange={setRepetida} icon="content_copy" />
+            <Toggle label="Colada no álbum" checked={colada} onChange={setColada} icon="book" />
           </div>
         </div>
 
@@ -112,7 +112,7 @@ const StickerForm = ({ user, onClose, editingSticker }) => {
           type="submit"
           className="w-full bg-primary text-on-primary font-bold py-4 rounded-xl shadow-lg hover:bg-primary-container transition-all disabled:opacity-50"
         >
-          {loading ? 'Saving...' : 'Save Sticker'}
+          {loading ? 'Salvando...' : 'Salvar Figurinha'}
         </button>
       </form>
     </div>
