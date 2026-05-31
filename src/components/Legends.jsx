@@ -1,0 +1,57 @@
+import { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import { db } from '../firebase';
+import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
+import { StickerCard } from './Collection';
+
+const Legends = ({ user }) => {
+  const [stickers, setStickers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { openForm } = useOutletContext();
+
+  useEffect(() => {
+    const q = query(
+      collection(db, `users/${user.uid}/figurinhas`), 
+      where('tipo', '==', 'legend'),
+      orderBy('jogador')
+    );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setStickers(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, [user.uid]);
+
+  if (loading) return null;
+
+  return (
+    <div className="flex flex-col gap-6 animate-in slide-in-from-right duration-500">
+      <div>
+        <h1 className="text-headline-md text-on-surface font-bold flex items-center gap-2">
+          <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
+          Legends Hall
+        </h1>
+        <p className="text-body-md text-on-surface-variant">Your most prestigious stickers in one place.</p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {stickers.map(sticker => (
+          <StickerCard 
+            key={sticker.id} 
+            sticker={sticker} 
+            onClick={() => openForm(sticker)}
+          />
+        ))}
+      </div>
+
+      {stickers.length === 0 && (
+        <div className="text-center py-20 bg-surface-container rounded-2xl border-2 border-dashed border-outline-variant">
+          <span className="material-symbols-outlined text-6xl text-outline-variant mb-4">stars</span>
+          <p className="text-body-lg text-on-surface-variant italic">No Legends yet. Keep collecting!</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Legends;
