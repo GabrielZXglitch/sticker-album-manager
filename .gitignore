@@ -30,3 +30,4 @@ stitch_export/
 firebase-debug.log*
 firestore-debug.log*
 ui-debug.log*
+.vercel
