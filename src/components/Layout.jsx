@@ -109,10 +109,14 @@ const MobileNavLink = ({ to, icon, label }) => (
       }`
     }
   >
-    <span className="material-symbols-outlined" style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}>
-      {icon}
-    </span>
-    <span className="text-label-sm">{label}</span>
+    {({ isActive }) => (
+      <>
+        <span className="material-symbols-outlined" style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}>
+          {icon}
+        </span>
+        <span className="text-label-sm">{label}</span>
+      </>
+    )}
   </NavLink>
 );
 
